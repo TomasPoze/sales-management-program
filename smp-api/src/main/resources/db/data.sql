@@ -3,7 +3,7 @@ INSERT INTO Users( username, password, email,name,last_name) VALUES( 'user', '{b
 
 INSERT INTO Roles(role_id, role) VALUES(1, 'ADMIN');
 INSERT INTO Roles(role_id, role) VALUES(2, 'EMPLOYEE');
-INSERT INTO Roles(role_id, role) VALUES(3, 'CUSTOMER');
+INSERT INTO Roles(role_id, role) VALUES(3, 'CLIENT');
 
 INSERT INTO Users_Roles(user_id, role_id) VALUES(1, 1);
 INSERT INTO Users_Roles(user_id, role_id) VALUES(2, 2);

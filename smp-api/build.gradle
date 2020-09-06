@@ -39,6 +39,10 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 
+	// Jakarta validation
+	compile group: 'jakarta.validation', name: 'jakarta.validation-api', version: '2.0.2'
+
+
 	// Test
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'

@@ -2,6 +2,7 @@ package com.codeacademy.praktika.user.entity;
 
 
 import lombok.Data;
+import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
 
@@ -15,5 +16,8 @@ public class Role {
     private Long id;
 
     @Column(name = "role")
-    private String role;
+    @Enumerated(EnumType.STRING)
+    @NaturalId
+    private RoleName role;
+
 }

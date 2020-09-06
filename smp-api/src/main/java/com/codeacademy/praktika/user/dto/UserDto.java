@@ -1,6 +1,7 @@
 package com.codeacademy.praktika.user.dto;
 
 import com.codeacademy.praktika.user.entity.Role;
+import com.codeacademy.praktika.user.entity.RoleName;
 import com.codeacademy.praktika.user.entity.User;
 import lombok.Data;
 
@@ -12,9 +13,12 @@ public class UserDto {
     private String name;
     private String lastName;
     private String username;
-    private Set<String> roles;
+    private Set<RoleName> roles;
     private String password;
     private String email;
+
+    public UserDto() {
+    }
 
     public UserDto(User user) {
         this.name = user.getName();
