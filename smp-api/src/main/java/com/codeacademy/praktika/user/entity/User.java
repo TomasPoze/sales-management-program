@@ -1,5 +1,7 @@
 package com.codeacademy.praktika.user.entity;
 
+import com.codeacademy.praktika.client.entity.Client;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import lombok.Builder;
 import lombok.Data;
@@ -12,9 +14,9 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
+
 
 @Data
 @Builder
@@ -32,6 +34,7 @@ public class User implements UserDetails {
     @Min(2)
     private String username;
 
+    @JsonIgnore
     @Column(name = "password", nullable = false)
     @NotEmpty
     private String password;
@@ -56,6 +59,9 @@ public class User implements UserDetails {
             inverseJoinColumns = {@JoinColumn(name = "role_id")}
     )
     private Set<Role> roles ;
+
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    private Client client;
 
     @Tolerate
     public User() {

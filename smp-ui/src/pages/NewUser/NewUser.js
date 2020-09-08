@@ -6,11 +6,12 @@ import Button from '@material-ui/core/Button';
 import { Field, Formik, Form } from 'formik';
 import userApi from '../../api/userApi';
 import { useHistory, useLocation } from 'react-router-dom';
+import Secured from '../../components/Secured/Secured'
 
 
 export default function SimpleContainer() {
 
-  
+
   const location = useLocation();
   const history = useHistory();
   const { from } = location.state || { from: { pathname: '/users' } }
@@ -113,8 +114,10 @@ export default function SimpleContainer() {
                   required
                 >
                   <option value="" disabled selected>Pasirinkite role</option>
-                  <option value="ADMIN">ADMIN</option>
-                  <option value="EMPLOYEE">EMPLOYEE</option>
+                  <Secured role="ADMIN">
+                    <option value="ADMIN" >ADMIN</option>
+                    <option value="EMPLOYEE">EMPLOYEE</option>
+                  </Secured>
                   <option value="CLIENT">CLIENT</option>
                 </Field>
               </h5>

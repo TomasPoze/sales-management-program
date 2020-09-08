@@ -1,5 +1,8 @@
 package com.codeacademy.praktika.user.services;
 
+import com.codeacademy.praktika.client.entity.Client;
+import com.codeacademy.praktika.client.repository.ClientRepository;
+import com.codeacademy.praktika.client.service.ClientService;
 import com.codeacademy.praktika.user.dto.UserDto;
 import com.codeacademy.praktika.user.entity.Role;
 import com.codeacademy.praktika.user.entity.User;
@@ -22,13 +25,15 @@ import java.util.Set;
 public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final RoleService roleService;
+    private final ClientService clientService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository, RoleService roleService) {
+    public UserService(UserRepository userRepository, RoleService roleService, ClientService clientService) {
         this.userRepository = userRepository;
         this.roleService = roleService;
+        this.clientService = clientService;
     }
 
     @Override
@@ -44,15 +49,32 @@ public class UserService implements UserDetailsService {
 
     public void createUser(UserDto userDto) {
         Set<Role> role = roleService.findRoleByName(userDto.getRoles());
-        User user = new User();
-        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-        user.setUsername(userDto.getUsername());
-        user.setName(userDto.getName());
-        user.setLastName(userDto.getLastName());
-        user.setEmail(userDto.getEmail());
-        user.setRoles(role);
+        if (userDto.getRoles().toString().equals("[CLIENT]")) {
 
-        userRepository.save(user);
+            User user = User.builder()
+                    .password(passwordEncoder.encode(userDto.getPassword()))
+                    .username(userDto.getUsername())
+                    .name(userDto.getName())
+                    .lastName(userDto.getLastName())
+                    .email(userDto.getEmail())
+                    .roles(role)
+                    .client(clientService.createClient())
+                    .build();
+
+            userRepository.save(user);
+        } else {
+            User user = User.builder()
+                    .password(passwordEncoder.encode(userDto.getPassword()))
+                    .username(userDto.getUsername())
+                    .name(userDto.getName())
+                    .lastName(userDto.getLastName())
+                    .email(userDto.getEmail())
+                    .roles(role)
+                    .client(null)
+                    .build();
+
+            userRepository.save(user);
+        }
     }
 
     public User getUserById(Long id) {
