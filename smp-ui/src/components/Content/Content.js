@@ -6,6 +6,12 @@ import UserInfo from '../../pages/UserInfo/UserInfo'
 import UsersList from '../../pages/UsersList/UsersList'
 import NewUser from '../../pages/NewUser/NewUser'
 import EditUser from '../../pages/EditUser/EditUser'
+import ProductList from '../../pages/ProductList/ProductList';
+import NewProduct from '../../pages/NewProduct/NewProduct';
+import EditProduct from '../../pages/EditProduct/EditProduct';
+import CategoryList from '../../pages/CategoryList/CategoryList';
+import NewCategory from '../../pages/NewCategory/NewCategory';
+import EditCategory from '../../pages/EditCategory/EditCategory';
 
 export default () => (
   <Switch>
@@ -14,6 +20,30 @@ export default () => (
     <Route path="/login">
       <Login />
     </Route>
+
+    <Route path="/products">
+      <ProductList />
+    </Route>
+
+    <Route path="/categories">
+      <CategoryList/>
+    </Route>
+
+    <PrivateRoute path="/category/:id">
+      <EditCategory/>
+    </PrivateRoute>
+
+    <PrivateRoute path="/category/new">
+      <NewCategory/>
+    </PrivateRoute>
+
+    <PrivateRoute path="/product/new">
+      <NewProduct />
+    </PrivateRoute>
+
+    <PrivateRoute path="/product/:id">
+      <EditProduct />
+    </PrivateRoute>
 
     <PrivateRoute path="/users">
       <UsersList />
@@ -28,7 +58,7 @@ export default () => (
     </PrivateRoute>
 
     <PrivateRoute path="/user/:id">
-      <EditUser/>
+      <EditUser />
     </PrivateRoute>
   </Switch>
 )
