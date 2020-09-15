@@ -4,6 +4,9 @@ export default {
   getClient(){
     return HTTP.get('/client')
   },
+  getClients(){
+    return HTTP.get('/client/clients')
+  },
   updateClient(client){
     let data = new FormData();
     data.set("email",client.email);

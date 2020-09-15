@@ -12,6 +12,12 @@ import EditProduct from '../../pages/EditProduct/EditProduct';
 import CategoryList from '../../pages/CategoryList/CategoryList';
 import NewCategory from '../../pages/NewCategory/NewCategory';
 import EditCategory from '../../pages/EditCategory/EditCategory';
+import OrderProduct from '../../pages/OrderProduct/OrderProduct';
+import OrderList from '../../pages/OrderList/OrderList'
+import EditOrder from '../../pages/EditOrder/EditOrder'
+import EditOrderProduct from '../../pages/EditOrderProduct/EditOrderProduct';
+import ClientOrders from '../../pages/ClientOrders/ClientOrders';
+import AddOrderProduct from '../../pages/AddOrderProduct/AddOrderProduct'
 
 export default () => (
   <Switch>
@@ -26,15 +32,39 @@ export default () => (
     </Route>
 
     <Route path="/categories">
-      <CategoryList/>
+      <CategoryList />
     </Route>
 
+    <Route path="/cart">
+      <OrderProduct />
+    </Route>
+
+    <PrivateRoute path="/add/order/product/:id">
+      <AddOrderProduct/>
+    </PrivateRoute>
+
+    <PrivateRoute path="/client/orders">
+      <ClientOrders/>
+    </PrivateRoute>
+
+    <PrivateRoute path="/order/product/:id">
+      <EditOrderProduct/>
+    </PrivateRoute>
+
+    <PrivateRoute path="/orders">
+      <OrderList/>
+    </PrivateRoute>
+
+    <PrivateRoute path="/order/:id">
+      <EditOrder/>
+    </PrivateRoute>
+
     <PrivateRoute path="/category/:id">
-      <EditCategory/>
+      <EditCategory />
     </PrivateRoute>
 
     <PrivateRoute path="/category/new">
-      <NewCategory/>
+      <NewCategory />
     </PrivateRoute>
 
     <PrivateRoute path="/product/new">

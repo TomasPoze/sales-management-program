@@ -6,6 +6,8 @@ import com.codeacademy.praktika.exception.ClientNotFoundException;
 import com.codeacademy.praktika.user.entity.User;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ClientService {
     private final ClientRepository clientRepository;
@@ -33,5 +35,9 @@ public class ClientService {
     public Client findClientById(Long id){
         return clientRepository.findById(id)
                 .orElseThrow(() -> new ClientNotFoundException("Client with: " + id + " id does not exist!"));
+    }
+
+    public List<Client> getClients() {
+        return clientRepository.findAll();
     }
 }

@@ -29,6 +29,7 @@ export default () => {
             <th>Purchase Cost</th>
             <th>Category Id</th>
             <th>Category</th>
+            <th>Order</th>
             <th>Option</th>
           </tr>
         </thead>
@@ -42,6 +43,11 @@ export default () => {
               <td>{product.purchaseCost}</td>
               <td>{product.productCategory.id}</td>
               <td>{product.productCategory.category}</td>
+              <td>
+                <NavLink to={'/cart'} >
+                  Prideti i krepseli
+                </NavLink>
+              </td>
               <td>
                 <NavLink to={`/product/${product.id}`}>
                   Redaguoti
