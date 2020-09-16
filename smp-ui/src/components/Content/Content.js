@@ -1,11 +1,11 @@
 import React from 'react';
 import { Switch, Redirect, Route } from 'react-router-dom';
 import Login from '../../pages/Login/Login';
-import PrivateRoute from '../PrivateRoute/PrivateRoute'
-import UserInfo from '../../pages/UserInfo/UserInfo'
-import UsersList from '../../pages/UsersList/UsersList'
-import NewUser from '../../pages/NewUser/NewUser'
-import EditUser from '../../pages/EditUser/EditUser'
+import PrivateRoute from '../PrivateRoute/PrivateRoute';
+import UserInfo from '../../pages/UserInfo/UserInfo';
+import UsersList from '../../pages/UsersList/UsersList';
+import NewUser from '../../pages/NewUser/NewUser';
+import EditUser from '../../pages/EditUser/EditUser';
 import ProductList from '../../pages/ProductList/ProductList';
 import NewProduct from '../../pages/NewProduct/NewProduct';
 import EditProduct from '../../pages/EditProduct/EditProduct';
@@ -13,11 +13,12 @@ import CategoryList from '../../pages/CategoryList/CategoryList';
 import NewCategory from '../../pages/NewCategory/NewCategory';
 import EditCategory from '../../pages/EditCategory/EditCategory';
 import OrderProduct from '../../pages/OrderProduct/OrderProduct';
-import OrderList from '../../pages/OrderList/OrderList'
-import EditOrder from '../../pages/EditOrder/EditOrder'
+import OrderList from '../../pages/OrderList/OrderList';
+import EditOrder from '../../pages/EditOrder/EditOrder';
 import EditOrderProduct from '../../pages/EditOrderProduct/EditOrderProduct';
 import ClientOrders from '../../pages/ClientOrders/ClientOrders';
-import AddOrderProduct from '../../pages/AddOrderProduct/AddOrderProduct'
+import AddOrderProduct from '../../pages/AddOrderProduct/AddOrderProduct';
+import InvoiceList from '../../pages/InvoiceList/InvoiceList';
 
 export default () => (
   <Switch>
@@ -35,28 +36,32 @@ export default () => (
       <CategoryList />
     </Route>
 
-    <Route path="/cart">
+    <PrivateRoute path="/invoices">
+      <InvoiceList />
+    </PrivateRoute>
+
+    <PrivateRoute path="/cart">
       <OrderProduct />
-    </Route>
+    </PrivateRoute>
 
     <PrivateRoute path="/add/order/product/:id">
-      <AddOrderProduct/>
+      <AddOrderProduct />
     </PrivateRoute>
 
     <PrivateRoute path="/client/orders">
-      <ClientOrders/>
+      <ClientOrders />
     </PrivateRoute>
 
     <PrivateRoute path="/order/product/:id">
-      <EditOrderProduct/>
+      <EditOrderProduct />
     </PrivateRoute>
 
     <PrivateRoute path="/orders">
-      <OrderList/>
+      <OrderList />
     </PrivateRoute>
 
     <PrivateRoute path="/order/:id">
-      <EditOrder/>
+      <EditOrder />
     </PrivateRoute>
 
     <PrivateRoute path="/category/:id">

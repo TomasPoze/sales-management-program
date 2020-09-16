@@ -129,7 +129,11 @@ public class OrderService {
     }
 
     public void deleteOrderProductById(Long id) {
+        OrderProduct orderProduct = getOrderProductById(id);
+        Order order = getOrderById(orderProduct.getOrder().getId());
         orderProductRepository.deleteById(id);
+        order.recalculateTotalSum();
+        orderRepository.save(order);
     }
 
     public List<Order> getAllOrders() {

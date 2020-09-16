@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import { Field, Formik, Form } from 'formik';
 import orderApi from '../../api/orderApi';
 import clientApi from '../../api/clientApi';
+import invoiceApi from '../../api/invoiceApi'
 
 import { useHistory, useLocation, useParams, NavLink } from 'react-router-dom';
 import OrderProduct from '../OrderProduct/OrderProduct';
@@ -16,6 +17,7 @@ export default function SimpleContainer() {
   const { id } = useParams({});
   const [orders, setOrders] = useState([]);
   const [orderProducts, setOrderProducts] = useState([]);
+  const [invoices, setInvoices] = useState([]);
   const [clients, setClients] = useState([]);
 
   const location = useLocation();
@@ -29,7 +31,7 @@ export default function SimpleContainer() {
 
   useEffect(() => {
     orderApi.fetchOrderById(id)
-      .then(response => setOrders(response.data));
+      .then(response => setOrders(response.data))
   }, [id])
 
   useEffect(() => {
@@ -40,9 +42,17 @@ export default function SimpleContainer() {
   useEffect(() => {
     orderApi.fetchOrderProductsById(id)
       .then(resp => setOrderProducts(resp.data))
-  }, [])
+  }, [id])
+
   const onSubmit = values => {
     orderApi.updateOrder(id, values)
+      .then(() => {
+        setTimeout(() => history.replace(from))
+      }, 1000)
+  }
+
+  const createInvoice = () => {
+    invoiceApi.createInvoice(id)
       .then(() => {
         setTimeout(() => history.replace(from))
       }, 1000)
@@ -54,6 +64,7 @@ export default function SimpleContainer() {
         setTimeout(() => history.replace(from))
       }, 1000)
   }
+
 
   const getClientId = orders.client === undefined ? "" : orders.client.id;
 
@@ -77,13 +88,51 @@ export default function SimpleContainer() {
 
   const disableUpdate = statusIsNew ? "" : "disabled"
 
+  const invoiceExist = orders.invoice === null ?
+    <>
+      <Button type="button" variant="contained" color="primary" onClick={createInvoice}>
+        Sukurti saskaita
+        </Button>
+    </> :
+    <>
+      <div>
+        <table className="tableM">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Invoice Number</th>
+              <th>Invoice Date</th>
+              <th>Payment Period</th>
+              <th>Total Price</th>
+              <th>Client Id</th>
+              <th>Order Id</th>
+              <th>Paid At</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{orders.invoice === undefined ? "" : orders.invoice.id}</td>
+              <td>{orders.invoice === undefined ? "" : orders.invoice.invoiceNumber}</td>
+              <td>{orders.invoice === undefined ? "" : orders.invoice.invoiceDate}</td>
+              <td>{orders.invoice === undefined ? "" : orders.invoice.paymentPeriod}</td>
+              <td>{orders.invoice === undefined ? "" : orders.invoice.totalPrice}</td>
+              <td>{orders.invoice === undefined ? "" : orders.client.id}</td>
+              <td>{orders.invoice === undefined ? "" : orders.id}</td>
+              <td className={orders.invoice && orders.invoice.paidAt ? "" : "isPaid"}>{orders.invoice === undefined ? "" : orders.invoice.paidAt}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </>
+
   const orderProductIsNew = statusIsNew ? <>
-          <NavLink to={`/add/order/product/${id}`}>
-          <Button type="button" variant="contained" color="primary" >
-            Prideti Produkta
+    <NavLink to={`/add/order/product/${id}`}>
+      <Button type="button" variant="contained" color="primary" >
+        Prideti Produkta
           </Button>
-        </NavLink>
+    </NavLink>
   </> : ""
+
 
   return (
     <React.Fragment>
@@ -125,13 +174,14 @@ export default function SimpleContainer() {
               Atnaujinti
             </Button>
             &nbsp;
-            <Button variant="contained" color="secondary" onClick={deleteProduct}>
+            {orders.orderStatus !== "NAUJAS" ? "" : <Button variant="contained" color="secondary" onClick={deleteProduct}>
               Istrinti uzsakyma
-            </Button>
+            </Button>}
+
             <hr />
           </Form>
         </Formik>
-        <h4 className="mt-3">Uzsakymo prekiu sarasas</h4>
+        <h4 className="mt-3">Uzsakytu prekiu sarasas</h4>
         <hr />
         <table className="tableM">
           <thead>
@@ -163,8 +213,11 @@ export default function SimpleContainer() {
             ))}
           </tbody>
         </table>
+        {orderProductIsNew}
+        <hr />
+        <h4 className="mt-3">Saskaitos faktura</h4>
+        {invoiceExist}
 
-          {orderProductIsNew}
 
       </Container>
     </React.Fragment>

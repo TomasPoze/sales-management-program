@@ -18,27 +18,28 @@ export default () => {
   const loggedInBlock = loggedIn() ?
     (
       <>
-        <Secured role="EMPLOYEE">
-          <NavLink to="/orders">
-            <span>Klientu Uzsakymai</span>
-          </NavLink>
-        </Secured>
         <Secured role="ADMIN">
+          <NavLink to="/invoices">
+            <span>Uzsakumu Saskaitos</span>
+          </NavLink>
           <NavLink to="/orders">
             <span>Klientu Uzsakymai</span>
           </NavLink>
+          <NavLink to="/users">
+            <span>Naudotojų sąrašas</span>
+          </NavLink>
         </Secured>
+
         <Secured role="CLIENT">
           <NavLink to="/client/orders">
             <span>Uzsakymai</span>
           </NavLink>
         </Secured>
-        <Secured role="ADMIN">
-          <NavLink to="/users">
-            <span>Naudotojų sąrašas</span>
-          </NavLink>
-        </Secured>
+
         <Secured role="EMPLOYEE">
+        <NavLink to="/orders">
+            <span>Klientu Uzsakymai</span>
+          </NavLink>
           <NavLink to="/users">
             <span>Naudotojų sąrašas</span>
           </NavLink>

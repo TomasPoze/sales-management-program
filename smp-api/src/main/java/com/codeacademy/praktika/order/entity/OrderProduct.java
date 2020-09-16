@@ -1,5 +1,6 @@
 package com.codeacademy.praktika.order.entity;
 
+import com.codeacademy.praktika.invoice.entity.Invoice;
 import com.codeacademy.praktika.product.entity.Product;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -29,6 +30,10 @@ public class OrderProduct {
     @ManyToOne(optional = false)
     @JoinColumn(nullable = false)
     private Order order;
+
+    @JsonIgnoreProperties({"invoiceItems"})
+    @ManyToOne
+    private Invoice invoice;
 
     @ManyToOne(optional = false)
     @JoinColumn(nullable = false)

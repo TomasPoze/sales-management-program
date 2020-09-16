@@ -60,7 +60,7 @@ export default () => {
                 >
                   <option value="" selected disabled>Pasirinkite Klienta</option>
                   {clients.map(client => (
-                    <option value={client.id}>{client.id} {client.title}</option>
+                    <option key={client.id} value={client.id}>{client.id} {client.title}</option>
                   ))}
                 </Field>
               </h5>

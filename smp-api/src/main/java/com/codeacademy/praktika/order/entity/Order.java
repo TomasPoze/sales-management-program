@@ -2,25 +2,22 @@ package com.codeacademy.praktika.order.entity;
 
 
 import com.codeacademy.praktika.client.entity.Client;
+import com.codeacademy.praktika.invoice.entity.Invoice;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.annotations.ApiModel;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Tolerate;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 @Getter
 @Setter
@@ -54,6 +51,11 @@ public class Order {
     @OneToMany(mappedBy = "order")
     private List<OrderProduct> orderItems = new ArrayList<>();
 
+    @JsonIgnoreProperties({"order","client"})
+    @OneToOne
+    @JoinColumn(name = "invoice_id")
+    private Invoice invoice;
+
     public void addItem(OrderProduct orderProduct) {
         orderProduct.setOrder(this);
         orderItems.add(orderProduct);
@@ -66,11 +68,11 @@ public class Order {
     @PrePersist
     @PreUpdate
     public void recalculateTotalSum() {
-       BigDecimal dec = new BigDecimal("0");
-       for (OrderProduct product : orderItems){
-           dec= dec.add(product.getTotal());
-       }
-       totalSum = dec;
+        BigDecimal dec = new BigDecimal("0");
+        for (OrderProduct product : orderItems) {
+            dec = dec.add(product.getTotal());
+        }
+        totalSum = dec;
     }
 
     @Tolerate
