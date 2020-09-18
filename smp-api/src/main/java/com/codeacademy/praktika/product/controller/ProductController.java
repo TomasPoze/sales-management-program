@@ -4,6 +4,7 @@ import com.codeacademy.praktika.product.entity.Product;
 import com.codeacademy.praktika.product.entity.ProductCategory;
 import com.codeacademy.praktika.product.service.ProductCategoryService;
 import com.codeacademy.praktika.product.service.ProductService;
+import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +27,15 @@ public class ProductController {
         return productService.getAllProducts();
     }
 
+    @GetMapping("/products/{id}")
+    public Page<Product> getProductByCategory(
+            @PathVariable Long id,
+            @RequestParam(name = "pageNumber", required = false, defaultValue = "0") int pageNumber,
+            @RequestParam(name = "pageSize") int pageSize
+    ) {
+        return productService.getProductsByCategoryPaginated(id,pageNumber,pageSize);
+    }
+
     @GetMapping("/{id}")
     public Product getProductById(@PathVariable Long id) {
         return productService.getProductById(id);
@@ -33,7 +43,7 @@ public class ProductController {
 
     @GetMapping("/delete/{id}")
     @PreAuthorize("hasRole('ADMIN') or hasRole('EMPLOYEE')")
-    public void deleteProduct(@PathVariable Long id){
+    public void deleteProduct(@PathVariable Long id) {
         productService.deleteProductByCategoryId(id);
     }
 
@@ -54,7 +64,6 @@ public class ProductController {
                 .price(price)
                 .purchaseCost(purchaseCost)
                 .build();
-
 
 
         return productService.createProduct(product);

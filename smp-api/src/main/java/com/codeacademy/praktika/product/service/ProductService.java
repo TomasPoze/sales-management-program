@@ -3,6 +3,9 @@ package com.codeacademy.praktika.product.service;
 import com.codeacademy.praktika.product.entity.Product;
 import com.codeacademy.praktika.product.exception.ProductNotFoundException;
 import com.codeacademy.praktika.product.repository.ProductRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,5 +37,10 @@ public class ProductService {
 
     public Product updateProduct(Product product) {
         return productRepository.save(product);
+    }
+
+    public Page<Product> getProductsByCategoryPaginated(Long id,int pageNumber, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber,pageSize);
+        return productRepository.findProductByProductCategoryId(id,pageable);
     }
 }

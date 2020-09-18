@@ -15,5 +15,11 @@ INSERT INTO Users_Roles(user_id, role_id) VALUES(2, 2);
 INSERT INTO Users_Roles(user_id, role_id) VALUES(3, 3);
 
 INSERT INTO Products_Category(category) VALUES ('Kompiuterine technika');
+INSERT INTO Products_Category(category) VALUES ('Autoprekės');
+INSERT INTO Products_Category(category) VALUES ('Knygos');
 
-INSERT INTO Products(price,purchase_cost,sku,title,category_id) VALUES (10,12,'LKL233KN','Pele',1);
+INSERT INTO Products(price,purchase_cost,sku,title,category_id) VALUES (10,12,'LKK404KT','Pele',1);
+INSERT INTO Products(price,purchase_cost,sku,title,category_id) VALUES (40,45,'LKK404KT','Klaviatura',1);
+INSERT INTO Products(price,purchase_cost,sku,title,category_id) VALUES (249.99,260,'LKK404KT','Moniturius',1);
+INSERT INTO Products(price,purchase_cost,sku,title,category_id) VALUES (118,120,'LKA233AP','Navigacija TomTom',2);
+INSERT INTO Products(price,purchase_cost,sku,title,category_id) VALUES (5,9,'LKK100KN','Altorių šėšėly',3);

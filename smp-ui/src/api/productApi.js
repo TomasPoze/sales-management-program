@@ -7,6 +7,9 @@ export default {
   fetchProducts(){
     return HTTP.get('/product/products');
   },
+  fetchProductsPaginated(id,pageNumber,pageSize){
+    return HTTP.get(`/product/products/${id}?pageNumber=${pageNumber}&pageSize=${pageSize}`)
+  },
   deleteProductById(id){
     return HTTP.get(`/product/delete/${id}`);
   },

@@ -18,6 +18,10 @@ export default () => {
   const loggedInBlock = loggedIn() ?
     (
       <>
+        <NavLink to="/categories">
+          <span>Kategorijos</span>
+        </NavLink>
+
         <Secured role="ADMIN">
           <NavLink to="/invoices">
             <span>Uzsakumu Saskaitos</span>

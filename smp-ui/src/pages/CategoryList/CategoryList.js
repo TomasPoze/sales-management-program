@@ -4,6 +4,7 @@ import categoryApi from '../../api/categoryApi';
 import Container from '@material-ui/core/Container';
 import { NavLink } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
+import Secured from '../../components/Secured/Secured'
 
 
 export default () => {
@@ -24,29 +25,52 @@ export default () => {
           <tr>
             <th>Id</th>
             <th>Category</th>
-            <th>Option</th>
+            <Secured role="ADMIN">
+              <th>Option</th>
+            </Secured>
+            <Secured role="EMPLOYEE">
+              <th>Option</th>
+            </Secured>
           </tr>
         </thead>
         <tbody>
           {categories.map(category => (
             <tr key={category.id}>
               <td>{category.id}</td>
-              <td>{category.category}</td>
-              <td>
-                <NavLink to={`/category/${category.id}`}>
-                  Redaguoti
-                </NavLink>
-              </td>
+              <td><NavLink to={`/products/${category.id}`}>{category.category} </NavLink></td>
+              <Secured role="ADMIN">
+                <td>
+                  <NavLink to={`/category/${category.id}`}>
+                    Redaguoti
+                  </NavLink>
+                </td>
+              </Secured>
+              <Secured role="EMPLOYYEE">
+                <td>
+                  <NavLink to={`/category/${category.id}`}>
+                    Redaguoti
+                  </NavLink>
+                </td>
+              </Secured>
             </tr>
           ))}
 
         </tbody>
       </table>
-      <NavLink className="noDec" to="/category/new">
-        <Button variant="contained" color="primary" className="center">
-          Prideti Kategorija
+      <Secured role="ADMIN">
+        <NavLink className="noDec" to="/category/new">
+          <Button variant="contained" color="primary" className="center">
+            Prideti Kategorija
         </Button>
-      </NavLink>
+        </NavLink>
+      </Secured>
+      <Secured role="EMPLOYEE">
+        <NavLink className="noDec" to="/category/new">
+          <Button variant="contained" color="primary" className="center">
+            Prideti Kategorija
+        </Button>
+        </NavLink>
+      </Secured>
     </Container>
   )
 }

@@ -68,13 +68,14 @@ export default () => {
             </tr>
           </thead>
           <tbody>
+
             {orders.map(order => (
               <tr key={order.id}>
-                <td>{order.invoice.invoiceNumber}</td>
-                <td>{order.invoice.invoiceDate}</td>
-                <td>{order.invoice.paymentPeriod}</td>
-                <td>{order.invoice.totalPrice}</td>
-                <td>{order.invoice.paidAt}</td>
+                <td>{order.invoice ? order.invoice.invoiceNumber :""}</td>
+                <td>{order.invoice ? order.invoice.invoiceDate : ""}</td>
+                <td>{order.invoice ? order.invoice.paymentPeriod : ""}</td>
+                <td>{order.invoice ? order.invoice.totalPrice : ""}</td>
+                <td>{order.invoice ? order.invoice.paidAt : ""}</td>
               </tr>
             ))}
 
