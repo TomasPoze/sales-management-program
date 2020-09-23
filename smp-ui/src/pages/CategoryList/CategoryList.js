@@ -45,7 +45,7 @@ export default () => {
                   </NavLink>
                 </td>
               </Secured>
-              <Secured role="EMPLOYYEE">
+              <Secured role="EMPLOYEE">
                 <td>
                   <NavLink to={`/category/${category.id}`}>
                     Redaguoti

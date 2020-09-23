@@ -3,10 +3,12 @@ import { NavLink, useParams } from 'react-router-dom';
 import { UserContext } from '../../App';
 import orderApi from '../../api/orderApi';
 import clientApi from '../../api/clientApi';
+import pdfApi from '../../api/pdfApi';
 
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import Secured from '../../components/Secured/Secured';
+
 
 
 export default () => {
@@ -25,6 +27,19 @@ export default () => {
     orderApi.fetchClientOrders(clients.id)
       .then(response => setOrders(response.data))
   }, [])
+
+
+  function createPdf(order) {
+    pdfApi.createPdf(order.id)
+      .then((resp) => {
+        const url = window.URL.createObjectURL(new Blob([resp.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download',`${order.invoice === undefined ? "" : order.invoice.invoiceNumber}.pdf`)
+        document.body.appendChild(link);
+        link.click();
+      })
+  }
 
   return (
     <Container>
@@ -54,7 +69,7 @@ export default () => {
         </table>
       </div>
       <hr/>
-      <div>
+      <div id="divToPrint">
         <h4>Saskaitos fakturos</h4>
         <hr/>
         <table className="tableM">
@@ -65,10 +80,10 @@ export default () => {
               <th>Payment Period</th>
               <th>Total price</th>
               <th>Paid At</th>
+              <th>PDF</th>
             </tr>
           </thead>
           <tbody>
-
             {orders.map(order => (
               <tr key={order.id}>
                 <td>{order.invoice ? order.invoice.invoiceNumber :""}</td>
@@ -76,12 +91,13 @@ export default () => {
                 <td>{order.invoice ? order.invoice.paymentPeriod : ""}</td>
                 <td>{order.invoice ? order.invoice.totalPrice : ""}</td>
                 <td>{order.invoice ? order.invoice.paidAt : ""}</td>
+                <td><button onClick={() => createPdf(order)}>Download</button></td>
               </tr>
             ))}
-
           </tbody>
         </table>
       </div>
+      
       <Secured role="EMPLOYEE">
         <NavLink className="noDec" to="/cart">
           <Button variant="contained" color="primary" className="center">
