@@ -117,6 +117,7 @@ export default function SimpleContainer() {
                   <Secured role="ADMIN">
                     <option value="ADMIN" >ADMIN</option>
                     <option value="EMPLOYEE">EMPLOYEE</option>
+                    <option value="ACCOUNTANT">ACCOUNTANT</option>
                   </Secured>
                   <option value="CLIENT">CLIENT</option>
                 </Field>

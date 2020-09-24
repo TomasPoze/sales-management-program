@@ -58,8 +58,6 @@ export default () => {
   ) : <></>
 
   const mainRole = otherUser.roles === undefined ? "" : otherUser.roles[0].role
-  const notAC = mainRole === "ADMIN" || mainRole === "CLIENT" ? "EMPLOYEE" : "ADMIN";
-  const notAE = mainRole === "ADMIN" || mainRole === "EMPLOYEE" ? "CLIENT" : "ADMIN"
 
   return (
     <React.Fragment>
@@ -134,9 +132,12 @@ export default () => {
                   as="select"
                   variant="outlined"
                 >
-                  <option value={mainRole}>{mainRole}</option>
-                  <option value={notAC}>{notAC}</option>
-                  <option value={notAE}>{notAE}</option>
+
+                  <option value="" selected disabled>Pasirinkite role</option>
+                  <option value="ADMIN">ADMIN</option>
+                  <option value="EMPLOYEE">EMPLOYEE</option>
+                  <option value="ACCOUNTANT">ACCOUNTANT</option>
+                  <option value="CLIENT">CLIENT</option>
                 </Field>
               </h5>
             </div>

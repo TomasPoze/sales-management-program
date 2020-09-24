@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 
 import { Field, Formik, Form } from 'formik';
-import categoryApi from '../../api/categoryApi';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
 import orderApi from '../../api/orderApi';
 

@@ -1,6 +1,5 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { NavLink, useParams } from 'react-router-dom';
-import { UserContext } from '../../App';
+import React, { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import orderApi from '../../api/orderApi';
 import clientApi from '../../api/clientApi';
 import pdfApi from '../../api/pdfApi';
@@ -13,8 +12,6 @@ import Secured from '../../components/Secured/Secured';
 
 export default () => {
 
-  const { id } = useParams({});
-
   const [orders, setOrders] = useState([]);
   const [clients, setClients] = useState([])
 
@@ -26,7 +23,7 @@ export default () => {
   useEffect(() => {
     orderApi.fetchClientOrders(clients.id)
       .then(response => setOrders(response.data))
-  }, [])
+  }, [clients.id])
 
 
   function createPdf(order) {

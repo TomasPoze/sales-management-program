@@ -11,7 +11,7 @@ import {
   TableContainer,
   Paper,
   TablePagination,
-  CircularProgress, Container
+  CircularProgress, Container, TableFooter
 } from '@material-ui/core'
 
 export default () => {
@@ -36,10 +36,11 @@ export default () => {
     setPage(newPage);
   }
 
+
+
   return (
     <>
       <Container>
-
         <TableContainer component={Paper}>
           <Table>
             <TableHead>
@@ -52,7 +53,7 @@ export default () => {
               {isLoading ?
                 <TableRow>
                   <TableCell colSpan="3">
-                    <CircularProgress class="loader" />
+                    <CircularProgress className="loader" />
                   </TableCell>
                 </TableRow> :
                 productsPage.content.map(product => (
@@ -62,14 +63,18 @@ export default () => {
                   </TableRow>
                 ))}
             </TableBody>
-            <TablePagination
-              rowsPerPageOptions={[20, 30, 50]}
-              rowsPerPage={rowsPerPage}
-              count={productsPage.totalElements}
-              page={page}
-              onChangeRowsPerPage={handleChangeRowsPerPage}
-              onChangePage={handleChangePage}
-            />
+            <TableFooter>
+              <TableRow>
+                <TablePagination
+                  rowsPerPageOptions={[20, 30, 50]}
+                  rowsPerPage={rowsPerPage}
+                  count={productsPage.conten === undefined ? 0 : productsPage.conten.length}
+                  page={page}
+                  onChangeRowsPerPage={handleChangeRowsPerPage}
+                  onChangePage={handleChangePage}
+                />
+              </TableRow>
+            </TableFooter>
           </Table>
         </TableContainer>
       </Container>

@@ -52,7 +52,7 @@ export default () => {
           <span>{user.name} {user.lastName}</span>
         </NavLink>
                 &nbsp;
-        <a href="#" onClick={logoutClick}>Atsijungti</a>
+        <button onClick={logoutClick}>Atsijungti</button>
       </>
     ) : <></>
 

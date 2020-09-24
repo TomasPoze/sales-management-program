@@ -54,7 +54,6 @@ export default () => {
               </Secured>
             </tr>
           ))}
-
         </tbody>
       </table>
       <Secured role="ADMIN">

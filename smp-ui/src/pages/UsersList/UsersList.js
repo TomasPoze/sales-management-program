@@ -46,7 +46,7 @@ export default () => {
                             </td>
                         </tr>
                     ))}
-                    
+
                 </tbody>
             </table>
             <NavLink className="noDec" to="/user/new">

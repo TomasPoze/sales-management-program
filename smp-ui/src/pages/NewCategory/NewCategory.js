@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 
@@ -9,8 +9,6 @@ import { useHistory, useLocation } from 'react-router-dom';
 
 
 export default function SimpleContainer() {
-
-  const [categories, setCategories] = useState([]);
 
   const location = useLocation();
   const history = useHistory();
