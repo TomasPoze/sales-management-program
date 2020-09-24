@@ -1,19 +1,16 @@
-package com.codeacademy.praktika.pdf.entity;
+package com.codeacademy.praktika.pdf.service;
 
 import be.quodlibet.boxable.BaseTable;
-import be.quodlibet.boxable.Cell;
-import be.quodlibet.boxable.Row;
 import be.quodlibet.boxable.datatable.DataTable;
 import com.codeacademy.praktika.invoice.service.InvoiceService;
 import com.codeacademy.praktika.order.entity.OrderProduct;
 import com.codeacademy.praktika.order.service.OrderService;
-import lombok.Getter;
-import lombok.Setter;
+
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType0Font;
-import org.apache.pdfbox.pdmodel.font.PDType1Font;
+
 
 import org.springframework.stereotype.Service;
 

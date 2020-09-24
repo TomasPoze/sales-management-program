@@ -1,7 +1,7 @@
 INSERT INTO Users( username, password, email,name,last_name) VALUES( 'admin', '{bcrypt}$2y$12$A7x.2lPxE6YdV8ed6OYbDucRiod32wqMF9JNerE.wq4glQWaIjRnO', 'kapitonasjonas@gmail.com', 'Jonas' ,'Kapitonas');
 INSERT INTO Users( username, password, email,name,last_name) VALUES( 'user', '{bcrypt}$2y$12$A7x.2lPxE6YdV8ed6OYbDucRiod32wqMF9JNerE.wq4glQWaIjRnO', 'user@gmail.com', 'Nikolas' ,'Cage');
 
-INSERT INTO Clients(address,bank_acc_nr,code,email,title) VALUES ('Zirmunu','LT2134123412341234','1233213','kapicorn@gmail.com','Jonas Biliunas');
+INSERT INTO Clients(address,bank_acc_nr,code,email,title) VALUES ('Zirmunu','LT2134123412341234','1233213','ltucrafteriai@gmail.com','Jonas Biliunas');
 INSERT INTO Users( username, password, email,name,last_name,client_client_id) VALUES( 'client', '{bcrypt}$2y$12$A7x.2lPxE6YdV8ed6OYbDucRiod32wqMF9JNerE.wq4glQWaIjRnO', 'client@gmail.com', 'Donald' ,'Grump',1);
 
 -- INSERT INTO ORDERS (ORDER_ID,ORDER_DATE,ORDER_NUMBER,ORDER_STATUS,ORDER_SUM,CLIENT_CLIENT_ID) VALUES (1, '2020-09-09' ,'U-00001','NAUJAS',100,1);

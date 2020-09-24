@@ -12,9 +12,24 @@ import pdfApi from '../../api/pdfApi';
 import { useHistory, useLocation, useParams, NavLink } from 'react-router-dom';
 
 
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 export default function SimpleContainer() {
+  // Popup dialgo box
+  const [open, setOpen] = React.useState(false);
 
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  // Popup dialog box
 
   const { id } = useParams({});
   const [orders, setOrders] = useState([]);
@@ -54,12 +69,18 @@ export default function SimpleContainer() {
         const url = window.URL.createObjectURL(new Blob([resp.data]));
         const link = document.createElement('a');
         link.href = url;
-        link.setAttribute('download',`${orders.invoice === undefined ? "" : orders.invoice.invoiceNumber}.pdf`)
+        link.setAttribute('download', `${orders.invoice === undefined ? "" : orders.invoice.invoiceNumber}.pdf`)
         document.body.appendChild(link);
         link.click();
       })
   }
 
+  const sendPdf = () => {
+    pdfApi.sendPdf(id)
+      .then(() => {
+        setTimeout(() => setOpen(true))
+      },1000)
+  }
 
   const onSubmit = values => {
     orderApi.updateOrder(id, values)
@@ -109,7 +130,7 @@ export default function SimpleContainer() {
     <>
       <Button type="button" variant="contained" color="primary" onClick={createInvoice}>
         Sukurti saskaita
-        </Button>
+      </Button>
     </> :
     <>
       <div>
@@ -125,6 +146,7 @@ export default function SimpleContainer() {
               <th>Order Id</th>
               <th>Paid At</th>
               <th>PDF</th>
+              <th>Send to email</th>
             </tr>
           </thead>
           <tbody>
@@ -138,6 +160,7 @@ export default function SimpleContainer() {
               <td>{orders.invoice === undefined ? "" : orders.id}</td>
               <td className={orders.invoice && orders.invoice.paidAt ? "" : "isPaid"}>{orders.invoice === undefined ? "" : orders.invoice.paidAt}</td>
               <td>{orders.invoice === null ? "" : <button onClick={() => createPdf()}>Download</button>}</td>
+              <td>{orders.invoice === null ? "" : <button onClick={() => sendPdf()}>Send PDF to client</button>}</td>
             </tr>
           </tbody>
         </table>
@@ -240,9 +263,29 @@ export default function SimpleContainer() {
           <h4 className="mt-3">Saskaitos faktura</h4>
           {invoiceExist}
         </div>
-        
 
-
+        {/* PopUpDialog */}
+        <div>
+          <Dialog
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title">{"Email status"}</DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                Email was sent successfully.
+                    </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose} color="primary" autoFocus>
+                Close
+                    </Button>
+            </DialogActions>
+          </Dialog>
+        </div>
+        {/* PopUpDialog End*/}
       </Container>
     </React.Fragment>
   );
