@@ -13,7 +13,6 @@ import com.codeacademy.praktika.order.repository.OrderRepository;
 import com.codeacademy.praktika.product.entity.Product;
 import com.codeacademy.praktika.product.exception.ProductNotFoundException;
 import com.codeacademy.praktika.product.repository.ProductRepository;
-import com.codeacademy.praktika.product.service.ProductService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -67,7 +66,8 @@ public class OrderService {
                     OrderProduct orderProduct = new OrderProduct();
 
                     orderProduct.setQuantity(r.getQuantity());
-                    orderProduct.setPricePerUnit(product.getPrice());
+                    orderProduct.setPricePerUnit(product.getPurchaseCost());
+                    orderProduct.setProductCostPerUnit(product.getPrice());
                     orderProduct.setOrder(order);
                     orderProduct.recalculateTotalPrice();
                     orderProduct.setProduct(product);
@@ -160,7 +160,8 @@ public class OrderService {
                 OrderProduct orderProduct = new OrderProduct();
                 orderProduct.setQuantity(quantity);
                 orderProduct.setProduct(productRepository.findById(productId).orElseThrow(() -> new ProductNotFoundException("Product with this: " + id + " was not found!")));
-                orderProduct.setPricePerUnit(orderProduct.getProduct().getPrice());
+                orderProduct.setPricePerUnit(orderProduct.getProduct().getPurchaseCost());
+                orderProduct.setProductCostPerUnit(orderProduct.getProduct().getPrice());
                 orderProduct.recalculateTotalPrice();
 
                 order.addItem(orderProduct);

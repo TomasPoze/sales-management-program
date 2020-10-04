@@ -3,13 +3,16 @@ package com.codeacademy.praktika.product.entity;
 import io.swagger.annotations.ApiModel;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Tolerate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
-@Data
+@Getter
+@Setter
 @Builder
 @Entity
 @Table(name = "Products")

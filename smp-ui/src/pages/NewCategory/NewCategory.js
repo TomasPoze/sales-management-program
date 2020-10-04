@@ -30,7 +30,7 @@ export default function SimpleContainer() {
     <React.Fragment>
       <CssBaseline />
       <Container maxWidth="lg">
-        <h4 className="mt-3">Produkto kurimas</h4>
+        <h4 className="mt-3">Kategorijos kurimas</h4>
         <hr />
         <Formik
           initialValues={initialValues}

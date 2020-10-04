@@ -4,6 +4,8 @@ INSERT INTO Users( username, password, email,name,last_name) VALUES( 'user', '{b
 INSERT INTO Clients(address,bank_acc_nr,code,email,title) VALUES ('Zirmunu','LT2134123412341234','1233213','ltucrafteriai@gmail.com','Jonas Biliunas');
 INSERT INTO Users( username, password, email,name,last_name,client_client_id) VALUES( 'client', '{bcrypt}$2y$12$A7x.2lPxE6YdV8ed6OYbDucRiod32wqMF9JNerE.wq4glQWaIjRnO', 'client@gmail.com', 'Donald' ,'Grump',1);
 
+INSERT INTO Users( username, password, email,name,last_name) VALUES( 'buhal', '{bcrypt}$2y$12$A7x.2lPxE6YdV8ed6OYbDucRiod32wqMF9JNerE.wq4glQWaIjRnO', 'buhal@gmail.com', 'Smygolas' ,'Rage');
+
 -- INSERT INTO ORDERS (ORDER_ID,ORDER_DATE,ORDER_NUMBER,ORDER_STATUS,ORDER_SUM,CLIENT_CLIENT_ID) VALUES (1, '2020-09-09' ,'U-00001','NAUJAS',100,1);
 
 INSERT INTO Roles(role_id, role) VALUES(1, 'ADMIN');
@@ -14,6 +16,7 @@ INSERT INTO Roles(role_id, role) VALUES(4, 'ACCOUNTANT');
 INSERT INTO Users_Roles(user_id, role_id) VALUES(1, 1);
 INSERT INTO Users_Roles(user_id, role_id) VALUES(2, 2);
 INSERT INTO Users_Roles(user_id, role_id) VALUES(3, 3);
+INSERT INTO Users_Roles(user_id, role_id) VALUES(4, 4);
 
 INSERT INTO Products_Category(category) VALUES ('Kompiuterine technika');
 INSERT INTO Products_Category(category) VALUES ('Autoprekės');

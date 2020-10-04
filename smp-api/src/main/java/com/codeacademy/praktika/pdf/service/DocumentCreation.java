@@ -108,13 +108,6 @@ public class DocumentCreation {
 
         return output;
 
-//        contentStream.close();
-//
-//        document.save("C:/Users/Tomas/Desktop/temp/saskaita.pdf");
-//
-//        System.out.println("PDF Created");
-//
-//        document.close();
     }
 
 }

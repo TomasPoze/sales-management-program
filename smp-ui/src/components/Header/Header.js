@@ -23,11 +23,17 @@ export default () => {
         </NavLink>
 
         <Secured role="ADMIN">
+          <NavLink to="/products">
+            <span>Visos prekės</span>
+          </NavLink>
+          <NavLink to="/sale/reports">
+            <span>Pardavimų ataskaitos</span>
+          </NavLink>
           <NavLink to="/invoices">
-            <span>Uzsakumu Saskaitos</span>
+            <span>Užsakymų Sąskaitos</span>
           </NavLink>
           <NavLink to="/orders">
-            <span>Klientu Uzsakymai</span>
+            <span>Klientų Užsakymai</span>
           </NavLink>
           <NavLink to="/users">
             <span>Naudotojų sąrašas</span>
@@ -36,13 +42,22 @@ export default () => {
 
         <Secured role="CLIENT">
           <NavLink to="/client/orders">
-            <span>Uzsakymai</span>
+            <span>Užsakymai</span>
+          </NavLink>
+        </Secured>
+
+        <Secured role="ACCOUNTANT">
+          <NavLink to="/sale/reports">
+            <span>Pardavimų ataskaitos</span>
           </NavLink>
         </Secured>
 
         <Secured role="EMPLOYEE">
+        <NavLink to="/products">
+            <span>Visos prekės</span>
+          </NavLink>
         <NavLink to="/orders">
-            <span>Klientu Uzsakymai</span>
+            <span>Klientų Užsakymai</span>
           </NavLink>
           <NavLink to="/users">
             <span>Naudotojų sąrašas</span>

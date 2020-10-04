@@ -59,7 +59,7 @@ export default () => {
                 productsPage.content.map(product => (
                   <TableRow key={product.title}>
                     <TableCell>{product.title}</TableCell>
-                    <TableCell>{product.price}€</TableCell>
+                    <TableCell>{product.purchaseCost}€</TableCell>
                   </TableRow>
                 ))}
             </TableBody>

@@ -2,6 +2,7 @@ package com.codeacademy.praktika.invoice.controller;
 
 import com.codeacademy.praktika.invoice.entity.Invoice;
 import com.codeacademy.praktika.invoice.service.InvoiceService;
+import com.codeacademy.praktika.salesreport.service.SalesReportService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 

@@ -87,9 +87,10 @@ export default function SimpleContainer() {
 
   const createInvoice = () => {
     invoiceApi.createInvoice(id)
-      .then(() => {
-        setTimeout(() => history.replace(from))
-      }, 1000)
+    invoiceApi.createSalesReport(id)
+    .then(() => {
+      setTimeout(() => history.replace(from))
+    },1000) 
   }
 
   const deleteProduct = () => {

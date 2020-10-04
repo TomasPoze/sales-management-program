@@ -12,5 +12,11 @@ export default {
   },
   invoiceIsPaid(id){
     return HTTP.post(`/invoice/paid/${id}`)
+  },
+  createSalesReport(id){
+    return HTTP.post(`/sales/create/${id}`)
+  },
+  updateSalesProfit(id){
+    return HTTP.post(`/sales/paid/${id}`)
   }
 }

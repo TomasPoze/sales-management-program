@@ -2,11 +2,11 @@ package com.codeacademy.praktika.order.entity;
 
 import com.codeacademy.praktika.invoice.entity.Invoice;
 import com.codeacademy.praktika.product.entity.Product;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.annotations.ApiModel;
 import lombok.Builder;
-import lombok.Data;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Tolerate;
@@ -43,15 +43,22 @@ public class OrderProduct {
     private BigDecimal pricePerUnit;
 
     @NotNull
+    private BigDecimal productCostPerUnit;
+
+    @NotNull
     private BigDecimal quantity;
 
     @NotNull
     private BigDecimal total;
 
+    @NotNull
+    private BigDecimal productCost;
+
     @PrePersist
     @PreUpdate
     public void recalculateTotalPrice(){
         total = pricePerUnit.multiply(quantity);
+        productCost = productCostPerUnit.multiply(quantity);
     }
 
     @Tolerate

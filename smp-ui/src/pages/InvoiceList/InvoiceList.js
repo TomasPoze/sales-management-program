@@ -22,6 +22,7 @@ export default () => {
   const setPaidTrue = (invoice) => {
     if(!invoice.paidAt){
       invoiceApi.invoiceIsPaid(invoice.id)
+      invoiceApi.updateSalesProfit(invoice.id)
       .then(() => {
         setTimeout(() => history.replace(from))
       }, 1000)

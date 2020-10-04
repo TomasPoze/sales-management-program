@@ -7,6 +7,7 @@ import com.codeacademy.praktika.order.entity.Order;
 
 import com.codeacademy.praktika.order.entity.OrderStatus;
 import com.codeacademy.praktika.order.service.OrderService;
+import com.codeacademy.praktika.salesreport.service.SalesReportService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +21,7 @@ import java.util.List;
 public class InvoiceService {
     private final InvoiceRepository invoiceRepository;
     private final OrderService orderService;
+
 
 
     public InvoiceService(InvoiceRepository invoiceRepository, OrderService orderService) {
@@ -47,6 +49,8 @@ public class InvoiceService {
         invoice.isPaid();
         order.setInvoice(invoice);
         order.setOrderStatus(OrderStatus.LAUKIAMA_APMOKEJIMO);
+
+
         return invoiceRepository.save(invoice);
     }
 

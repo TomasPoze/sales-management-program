@@ -20,6 +20,7 @@ import ClientOrders from '../../pages/ClientOrders/ClientOrders';
 import AddOrderProduct from '../../pages/AddOrderProduct/AddOrderProduct';
 import InvoiceList from '../../pages/InvoiceList/InvoiceList';
 import ProductsPaginated from '../../pages/ProductsByCategoryPaginated/ProductsPaginated'
+import SalesReport from '../../pages/SalesReport/SalesReport';
 
 export default () => (
   <Switch>
@@ -35,6 +36,10 @@ export default () => (
 
     <PrivateRoute path="/products">
       <ProductList />
+    </PrivateRoute>
+
+    <PrivateRoute path="/sale/reports">
+      <SalesReport/>
     </PrivateRoute>
 
     <Route path="/categories">
@@ -69,12 +74,12 @@ export default () => (
       <EditOrder />
     </PrivateRoute>
 
-    <PrivateRoute path="/category/:id">
-      <EditCategory />
+    <PrivateRoute exact path="/category/new">
+      <NewCategory />
     </PrivateRoute>
 
-    <PrivateRoute path="/category/new">
-      <NewCategory />
+    <PrivateRoute path="/category/:id">
+      <EditCategory />
     </PrivateRoute>
 
     <PrivateRoute path="/product/new">

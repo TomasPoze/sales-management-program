@@ -49,6 +49,7 @@ public class Invoice {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", shape = JsonFormat.Shape.STRING)
     private LocalDateTime paidAt;
 
+
     public boolean isPaid() {
         return paidAt != null;
     }
