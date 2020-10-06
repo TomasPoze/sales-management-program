@@ -55,6 +55,9 @@ dependencies {
 	// Jakarta validation
 	compile group: 'jakarta.validation', name: 'jakarta.validation-api', version: '2.0.2'
 
+	// Csv library
+	compile 'com.opencsv:opencsv:5.2'
+
 
 	// Test
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {

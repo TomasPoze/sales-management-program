@@ -17,7 +17,7 @@ import java.io.*;
 @RequestMapping("/pdf")
 public class PdfController {
 
-    private DocumentCreation documentCreation;
+    private final DocumentCreation documentCreation;
 
     public PdfController(DocumentCreation documentCreation) {
         this.documentCreation = documentCreation;
@@ -26,17 +26,7 @@ public class PdfController {
 
     @GetMapping("/{id}")
     @Produces("application/pdf")
-    public void createPdf(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response) throws IOException {
-//        File resultFile = File.createTempFile("saskaita", ".pdf");
-//
-//        ByteArrayOutputStream byteArrayOutputStream = documentCreation.createDocument(id);
-//
-//        try (OutputStream outputStream = new FileOutputStream(resultFile)) {
-//            byteArrayOutputStream.writeTo(outputStream);
-//        }
-//        System.out.println("Find your pdf file here " + resultFile.getAbsolutePath());
-//        System.out.println(resultFile);
-
+    public void createPdf(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response) {
 
         HttpSession httpSession = request.getSession(false);
         try {

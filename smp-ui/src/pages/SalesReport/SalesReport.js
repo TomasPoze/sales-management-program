@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
-// import './styles.css'
-import orderApi from '../../api/orderApi';
 import salesReportApi from '../../api/salesReportApi';
 import Container from '@material-ui/core/Container';
-
+import csvApi from '../../api/csvApi'
 
 export default () => {
 
@@ -11,10 +9,10 @@ export default () => {
   const [search, setSearch] = useState("");
   const [filteredReports, setFilteredReports] = useState([]);
 
-  useEffect(()=>{
+  useEffect(() => {
     salesReportApi.fetchSaleReports()
       .then(resp => setReports(resp.data))
-  },[])
+  }, [])
 
   useEffect(() => {
     setFilteredReports(
@@ -22,6 +20,18 @@ export default () => {
         report.salesDate.includes(search))
     )
   }, [search, reports])
+
+  const createCsv = () => {
+    csvApi.createCsv()
+      .then((resp) => {
+        const url = window.URL.createObjectURL(new Blob([resp.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', `sales.csv`)
+        document.body.appendChild(link);
+        link.click();
+      })
+  }
 
   return (
     <Container>
@@ -73,8 +83,8 @@ export default () => {
               </tr>
             ))}
           </tbody>
-
         </table>
+          <button onClick={() => createCsv()}>Download</button>
       </div>
     </Container>
   )
