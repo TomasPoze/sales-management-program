@@ -44,8 +44,8 @@ public class OrderController {
     }
 
     @PostMapping
-    public Order createOrder(@RequestBody OrderRequest orderRequest) {
-        return orderService.createNewOrder(orderRequest);
+    public Order createOrder(@AuthenticationPrincipal User user, @RequestBody OrderRequest orderRequest) {
+        return orderService.createNewOrder(user, orderRequest);
     }
 
     @PostMapping("/add/{id}")
@@ -54,7 +54,7 @@ public class OrderController {
             @RequestParam BigDecimal quantity,
             @RequestParam Long productId
     ) {
-        return orderService.addOrderProduct(id,quantity,productId);
+        return orderService.addOrderProduct(id, quantity, productId);
     }
 
     @PostMapping("/update/{id}")
@@ -73,6 +73,11 @@ public class OrderController {
             @RequestParam Long productId
     ) {
         return orderService.updateOrderProduct(id, quantity, productId);
+    }
+
+    @PostMapping("/update/user/{id}")
+    public Order updateAssignedWorker(@PathVariable Long id, @RequestParam Long userId){
+        return orderService.updateAssignedWorker(id,userId);
     }
 
     @GetMapping("/{id}")

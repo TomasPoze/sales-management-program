@@ -13,6 +13,8 @@ import com.codeacademy.praktika.order.repository.OrderRepository;
 import com.codeacademy.praktika.product.entity.Product;
 import com.codeacademy.praktika.product.exception.ProductNotFoundException;
 import com.codeacademy.praktika.product.repository.ProductRepository;
+import com.codeacademy.praktika.user.entity.User;
+import com.codeacademy.praktika.user.services.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,19 +31,23 @@ public class OrderService {
     private final OrderProductRepository orderProductRepository;
     private final ClientRepository clientRepository;
     private final ProductRepository productRepository;
+    private final UserService userService;
     private final EntityManager em;
 
-    public OrderService(OrderRepository orderRepository, OrderProductRepository orderProductRepository, ClientRepository clientRepository, ProductRepository productRepository, EntityManager em) {
+    public OrderService(OrderRepository orderRepository, OrderProductRepository orderProductRepository, ClientRepository clientRepository, ProductRepository productRepository, UserService userService, EntityManager em) {
         this.orderRepository = orderRepository;
         this.orderProductRepository = orderProductRepository;
         this.clientRepository = clientRepository;
         this.productRepository = productRepository;
+        this.userService = userService;
         this.em = em;
     }
 
     @Transactional
-    public Order createNewOrder(OrderRequest orderRequest) {
+    public Order createNewOrder(User user, OrderRequest orderRequest) {
         Order order = new Order();
+
+        order.setUser(user);
 
         LocalDateTime localDateTime = LocalDateTime.now();
 
@@ -172,5 +178,12 @@ public class OrderService {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public Order updateAssignedWorker(Long id, Long userId) {
+        Order order = getOrderById(id);
+        User user = userService.getUserById(userId);
+        order.setUser(user);
+        return orderRepository.save(order);
     }
 }

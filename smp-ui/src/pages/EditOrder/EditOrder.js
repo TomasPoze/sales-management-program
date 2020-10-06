@@ -17,6 +17,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import userApi from '../../api/userApi';
 
 export default function SimpleContainer() {
   // Popup dialgo box
@@ -30,6 +31,7 @@ export default function SimpleContainer() {
   const { id } = useParams({});
   const [orders, setOrders] = useState([]);
   const [orderProducts, setOrderProducts] = useState([]);
+  const [users, setUsers] = useState([]);
 
 
   const [clients, setClients] = useState([]);
@@ -42,6 +44,10 @@ export default function SimpleContainer() {
   const initialValues = {
     orderStatus: '',
     clientId: ''
+  }
+
+  const initialWorker = {
+    userId: ''
   }
 
   useEffect(() => {
@@ -59,6 +65,11 @@ export default function SimpleContainer() {
       .then(resp => setOrderProducts(resp.data))
   }, [id])
 
+  useEffect(() => {
+    userApi.fetchUsers()
+      .then(resp => setUsers(resp.data))
+  }, [])
+
   const createPdf = () => {
     pdfApi.createPdf(id)
       .then((resp) => {
@@ -75,7 +86,7 @@ export default function SimpleContainer() {
     pdfApi.sendPdf(id)
       .then(() => {
         setTimeout(() => setOpen(true))
-      },1000)
+      }, 1000)
   }
 
   const onSubmit = values => {
@@ -85,12 +96,19 @@ export default function SimpleContainer() {
       }, 1000)
   }
 
+  const onWorkerSubmit = values => {
+    orderApi.updateAssignedWorker(id, values)
+      .then(() => {
+        setTimeout(() => history.replace(from))
+      }, 1000)
+  }
+
   const createInvoice = () => {
     invoiceApi.createInvoice(id)
     invoiceApi.createSalesReport(id)
-    .then(() => {
-      setTimeout(() => history.replace(from))
-    },1000) 
+      .then(() => {
+        setTimeout(() => history.replace(from))
+      }, 1000)
   }
 
   const deleteProduct = () => {
@@ -179,6 +197,36 @@ export default function SimpleContainer() {
     <React.Fragment>
       <CssBaseline />
       <Container maxWidth="lg">
+        <h4 className="mt-3">Atsakingas darbuotojas</h4>
+        <hr />
+        <Formik
+          initialValues={initialWorker}
+          onSubmit={onWorkerSubmit}
+        >
+          <Form>
+            <div>
+              <h5>Atsakingas darbuotojas: {orders.user === undefined ? "" : orders.user.name + " " + orders.user.lastName}
+                <Field
+                  name="userId"
+                  as="select"
+                  variant="outlined"
+                  label="userId"
+                  placeholder={orders.user === undefined ? "" : orders.user.name + " " + orders.user.lastName}
+                >
+                  <option value="" selected disabled>Pasirinkite darbuotoją</option>
+                  {/* <option value={orders.user === undefined ? "" : orders.user.id} selected>{orders.user === undefined ? "" : orders.user.name + " " + orders.user.lastName}</option> */}
+                  {users.filter(user => user.roles[0].role === "EMPLOYEE").map(filteredUser => (
+                    <option key={filteredUser.id} value={filteredUser.id}>{filteredUser.name + " " + filteredUser.lastName}</option>
+                  ))}
+                </Field>
+              </h5>
+            </div>
+            <Button type="submit" variant="contained" color="primary">
+              Pakeisti darbuotoją
+            </Button>
+          </Form>
+        </Formik>
+        <hr />
         <h4 className="mt-3">Uzsakymo atnaujinimas</h4>
         <hr />
         <Formik

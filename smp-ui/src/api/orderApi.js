@@ -42,5 +42,10 @@ export default {
   },
   deleteOrderProductById(id) {
     return HTTP.get(`/order/delete/item/${id}`)
+  },
+  updateAssignedWorker(id,order){
+    let data = new FormData();
+    data.set("userId",order.userId);
+    return HTTP.post(`/order/update/user/${id}`,data)
   }
 }

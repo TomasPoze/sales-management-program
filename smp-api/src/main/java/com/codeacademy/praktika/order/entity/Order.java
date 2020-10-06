@@ -3,6 +3,7 @@ package com.codeacademy.praktika.order.entity;
 
 import com.codeacademy.praktika.client.entity.Client;
 import com.codeacademy.praktika.invoice.entity.Invoice;
+import com.codeacademy.praktika.user.entity.User;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -41,6 +42,10 @@ public class Order {
     @ManyToOne(optional = false)
     @JoinColumn(nullable = false)
     private Client client;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(nullable = false)
+    private User user;
 
     private BigDecimal totalSum;
 

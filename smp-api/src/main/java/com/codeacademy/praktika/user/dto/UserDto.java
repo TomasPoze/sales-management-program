@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 
 @Data
 public class UserDto {
+    private Long id;
     private String name;
     private String lastName;
     private String username;
@@ -21,6 +22,7 @@ public class UserDto {
     }
 
     public UserDto(User user) {
+        this.id = user.getId();
         this.name = user.getName();
         this.lastName = user.getLastName();
         this.email = user.getEmail();
