@@ -1,0 +1,9 @@
+textarea{
+  resize: none;
+}
+
+.commentBox{
+  border-style: solid;
+  border-width: 1px;
+  margin-bottom: 10px;
+}

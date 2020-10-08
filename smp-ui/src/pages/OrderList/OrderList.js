@@ -79,6 +79,7 @@ export default () => {
               <th>Employee Id</th>
               <th>Client Id</th>
               <th>Option</th>
+              <th>Info</th>
             </tr>
           </thead>
           <tbody>
@@ -95,6 +96,11 @@ export default () => {
                 <td>
                   <NavLink to={`/order/${order.id}`}>
                     Redaguoti
+                  </NavLink>
+                </td>
+                <td>
+                  <NavLink to={`/client/order/${order.id}`}>
+                    Užsakymo info
                   </NavLink>
                 </td>
               </tr>

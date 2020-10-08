@@ -60,7 +60,7 @@ public class User implements UserDetails {
     )
     private Set<Role> roles ;
 
-    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private Client client;
 
     @Tolerate

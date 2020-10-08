@@ -50,6 +50,7 @@ export default () => {
               <th>Order Date</th>
               <th>Total price</th>
               <th>Order Status</th>
+              <th>Info</th>
             </tr>
           </thead>
           <tbody>
@@ -59,6 +60,7 @@ export default () => {
                 <td>{order.localDateTime}</td>
                 <td>{order.totalSum}</td>
                 <td>{order.orderStatus}</td>
+                <td><NavLink to={`/client/order/${order.id}`}>More</NavLink></td>
               </tr>
             ))}
 

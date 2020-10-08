@@ -22,7 +22,6 @@ import java.util.List;
 
 @Getter
 @Setter
-@Builder
 @Entity
 @Table(name = "Orders")
 @ApiModel(value = "Order", description = "Order")
@@ -52,7 +51,7 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
 
-    //    @JsonIgnore
+
     @OneToMany(mappedBy = "order")
     private List<OrderProduct> orderItems = new ArrayList<>();
 
@@ -80,7 +79,7 @@ public class Order {
         totalSum = dec;
     }
 
-    @Tolerate
+
     public Order() {
     }
 
